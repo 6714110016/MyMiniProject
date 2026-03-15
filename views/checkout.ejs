@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>Payment Success</title>
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/all.css">
+
+<style>
+
+body{
+background:#f4f6f9;
+}
+
+.success-box{
+max-width:500px;
+margin:120px auto;
+background:#d4edda;
+border:2px solid #28a745;
+border-radius:10px;
+text-align:center;
+padding:40px;
+box-shadow:0px 5px 20px rgba(0,0,0,0.15);
+}
+
+.success-icon{
+font-size:60px;
+color:#28a745;
+margin-bottom:20px;
+}
+
+.success-text{
+font-size:28px;
+font-weight:bold;
+color:#155724;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="success-box">
+
+<div class="success-icon">
+<i class="fas fa-check-circle"></i>
+</div>
+
+<div class="success-text">
+ชำระเงินสำเร็จ ด้วยวิธี <%= paymentMethod %>
+</div>
+
+<p class="mt-3">
+สินค้า : <%= product.name %>
+</p>
+
+<a href="/" class="btn btn-success btn-lg mt-3">
+กลับหน้าหลัก
+</a>
+
+</div>
+
+</body>
+</html>

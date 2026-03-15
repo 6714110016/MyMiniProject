@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+</head>
+
+<body class="product-page">
+
+    <%- include('navbar.ejs') %>
+
+    <div class="container mt-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="card shadow">
+
+                    <!-- Product Image -->
+
+                    <img class="card-img-top img-fluid"
+                         src="/images/products/<%= product.image %>"
+                         alt="<%= product.name %>">
+
+                    <div class="card-body text-center">
+
+                        <h3 class="card-title">
+                            <%= product.name %>
+                        </h3>
+
+                        <h4 class="text-success">
+                            ราคา <%= product.price %> THB
+                        </h4>
+
+                        <p class="card-text">
+                            <%= product.description %>
+                        </p>
+
+                        <hr>
+
+                        <form action="/checkout" method="POST">
+
+                            <input type="hidden"
+                                   name="productId"
+                                   value="<%= product._id %>">
+
+                            <!-- PAYMENT -->
+
+                            <h5 class="mb-3">เลือกวิธีชำระเงิน</h5>
+
+                            <select name="paymentMethod" class="form-control mb-3">
+
+                                <% if(payments && payments.length > 0){ %>
+
+                                    <% payments.forEach(function(pay){ %>
+
+                                        <option value="<%= pay.name %>">
+                                            <%= pay.name %>
+                                        </option>
+
+                                    <% }) %>
+
+                                <% } else { %>
+
+                                    <option disabled>
+                                        ยังไม่มีวิธีชำระเงิน
+                                    </option>
+
+                                <% } %>
+
+                            </select>
+
+                            <!-- PROMOTION -->
+
+                            <h5 class="mb-3">เลือกโปรโมชั่น</h5>
+
+                            <select name="promotionId" class="form-control mb-3">
+
+                                <option value="">
+                                    ไม่มีโปรโมชั่น
+                                </option>
+
+                                <% if(promotions && promotions.length > 0){ %>
+
+                                    <% promotions.forEach(function(p){ %>
+
+                                        <option value="<%= p._id %>">
+                                            <%= p.name %> ลด <%= p.discount %>%
+                                        </option>
+
+                                    <% }) %>
+
+                                <% } %>
+
+                            </select>
+
+                            <button class="btn btn-success btn-lg btn-block">
+
+                                <i class="fas fa-credit-card"></i>
+                                ชำระเงิน
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

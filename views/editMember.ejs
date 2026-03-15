@@ -1,0 +1,34 @@
+<%- include('navbar') %>
+
+<div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 500px;">
+        <div class="card-header bg-primary text-white">
+            <h4>แก้ไขข้อมูลสมาชิก</h4>
+        </div>
+        <div class="card-body">
+            <form action="/members/update" method="POST">
+                <input type="hidden" name="id" value="<%= member._id %>">
+
+                <div class="form-group">
+                    <label>ชื่อสมาชิก:</label>
+                    <input type="text" name="name" class="form-control" value="<%= member.name %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" class="form-control" value="<%= member.email %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label>เบอร์โทร:</label>
+                    <input type="text" name="phone" class="form-control" value="<%= member.phone %>" required>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success">อัปเดตข้อมูล</button>
+                    <a href="/members" class="btn btn-secondary">ยกเลิก</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

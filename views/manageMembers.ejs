@@ -1,0 +1,38 @@
+<%- include('navbar') %> <div class="container mt-4">
+    <h2>จัดการสมาชิก</h2>
+    <p>เพิ่ม ลบ แก้ไขข้อมูลในฐานข้อมูล</p>
+    
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="ค้นหาสินค้า...">
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>ชื่อสมาชิก</th>
+                <th>Email</th>
+                <th>เบอร์โทร</th>
+                <th>ลบ</th>
+                <th>แก้ไข</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% members.forEach(function(member) { %>
+                <tr>
+                    <td><%= member.name %></td>
+                    <td><%= member.email %></td>
+                    <td><%= member.phone %></td>
+                    <td>
+                        <a href="/members/delete/<%= member._id %>" 
+                           class="btn btn-danger btn-sm" 
+                           onclick="return confirm('ยืนยันการลบสมาชิก?')">ลบ</a>
+                    </td>
+                    <td>
+                        <a href="/members/edit/<%= member._id %>" 
+                           class="btn btn-primary btn-sm">แก้ไข</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

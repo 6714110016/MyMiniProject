@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || "TECHGEN SHOP" %></title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/css/all.css">
+
+    <!-- CSS ของเว็บไซต์ -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="home-page">
+
+    <%- include('navbar.ejs') %>
+
+    <div class="container mt-4">
+
+        <!-- 🔎 ฟอร์มค้นหาสินค้า -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <form action="/search" method="GET" class="search-form">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-md-4">
+                            <input type="number"
+                                   class="form-control"
+                                   name="min"
+                                   placeholder="ราคาต่ำสุด">
+                        </div>
+
+                        <div class="col-md-4">
+                            <input type="number"
+                                   class="form-control"
+                                   name="max"
+                                   placeholder="ราคาสูงสุด">
+                        </div>
+
+                        <div class="col-md-4 text-center">
+                            <button type="submit"
+                                    class="btn btn-search w-100">
+                                <i class="fas fa-search"></i>
+                                ค้นหา
+                            </button>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+        <!-- 🛍️ แสดงรายการสินค้า -->
+        <div class="row mt-3">
+
+            <% Object.values(products).forEach(function(item){ %>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="card">
+
+                        <a href="/product/<%= item._id %>">
+
+                            <img class="card-img-top img-thumbnail"
+                                 src="/images/products/<%= item.image %>"
+                                 alt="<%= item.name %>">
+
+                        </a>
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+
+                                <a href="/product/<%= item._id %>">
+                                    <%= item.name %>
+                                </a>
+
+                            </h5>
+
+                            <p class="card-text">
+                                <strong>ราคา:</strong> <%= item.price %> THB
+                            </p>
+
+                            <p class="card-text">
+                                <%= item.description %>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

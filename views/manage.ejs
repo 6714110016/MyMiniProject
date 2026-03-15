@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Product</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+
+    <script src="js/jquery-3.4.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <%- include('navbar.ejs') %>
+
+    <div class="container mt-4">
+
+        <h2>จัดการสินค้า</h2>
+        <p>เพิ่ม ลบ แก้ไขข้อมูลในฐานข้อมูล</p>
+
+        <input
+            type="text"
+            id="searchInput"
+            class="form-control mb-3"
+            placeholder="🔍 ค้นหาสินค้า..."
+        >
+
+        <!-- ป้องกันตารางล้นหน้าจอ -->
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-striped">
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ชื่อสินค้า</th>
+                        <th>ราคา</th>
+                        <th>รายละเอียด</th>
+                        <th>รูปภาพ</th>
+                        <th>ลบ</th>
+                        <th>แก้ไข</th>
+                    </tr>
+                </thead>
+
+                <tbody id="productTable">
+
+                    <% Object.values(products).forEach(function(item){ %>
+
+                        <tr>
+
+                            <td class="name">
+                                <%= item.name %>
+                            </td>
+
+                            <td class="price">
+                                <%= item.price %>
+                            </td>
+
+                            <td class="description" style="max-width:400px; word-break:break-word;">
+                                <%= item.description %>
+                            </td>
+
+                            <td>
+                                <img
+                                    src="./images/products/<%= item.image %>"
+                                    alt="<%= item.name %>"
+                                    class="img-thumbnail"
+                                    style="width:120px;"
+                                >
+                            </td>
+
+                            <td>
+                                <a
+                                    class="btn btn-danger"
+                                    href="/delete/<%= item._id %>"
+                                    onclick="return confirm('คุณต้องการลบข้อมูลหรือไม่')"
+                                >
+                                    ลบ
+                                </a>
+                            </td>
+
+                            <td>
+                                <a
+                                    href="/edit/<%= item._id %>"
+                                    class="btn btn-primary"
+                                >
+                                    แก้ไข
+                                </a>
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        document.getElementById("searchInput").addEventListener("keyup", function () {
+
+            let filter = this.value.toLowerCase()
+            let rows = document.querySelectorAll("#productTable tr")
+
+            rows.forEach(row => {
+
+                let name = row.querySelector(".name").textContent.toLowerCase()
+                let price = row.querySelector(".price").textContent.toLowerCase()
+                let description = row.querySelector(".description").textContent.toLowerCase()
+
+                if (
+                    name.includes(filter) ||
+                    price.includes(filter) ||
+                    description.includes(filter)
+                ) {
+                    row.style.display = ""
+                } else {
+                    row.style.display = "none"
+                }
+
+            })
+
+        })
+
+    </script>
+
+</body>
+
+</html>

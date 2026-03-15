@@ -1,0 +1,104 @@
+    <%- include('navbar') %>
+
+<div class="container mt-4">
+
+    <h2>Promotion</h2>
+    <p>หน้าจัดการโปรโมชั่นสินค้า</p>
+
+    <% if (user && user.role === "owner") { %>
+
+        <button class="btn btn-success mt-3" data-toggle="collapse" data-target="#promotionForm">
+            + Create Promotion
+        </button>
+
+        <div id="promotionForm" class="collapse mt-3">
+
+            <form action="/promotion/create" method="POST">
+
+                <div class="form-group">
+                    <label>ชื่อโปรโมชั่น</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>ส่วนลด (%)</label>
+                    <input type="number" name="discount" class="form-control" required>
+                </div>
+
+                
+                  <button type="submit" class="btn btn-primary mt-2">
+                    Save Promotion
+                </button>
+
+            </form>
+
+        </div>
+
+    <% } %>
+
+    <hr class="mt-4">
+
+    <h4>Promotion List</h4>
+
+    <table class="table table-bordered mt-3">
+
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>ชื่อโปรโมชั่น</th>
+                <th>ส่วนลด</th>
+                </tr>
+        </thead>
+
+        <tbody>
+
+        <% if(promotions && promotions.length > 0){ %>
+
+            <% promotions.forEach((p,index)=>{ %>
+
+                <tr>
+
+                    <td><%= index+1 %></td>
+
+                    <td><%= p.name %></td>
+
+                    <td class="text-success">
+                        <b><%= p.discount %>%</b>
+                    </td>
+
+                    <td><%= p.description %></td>
+
+                    <td>
+
+                        <% if(user && user.role === "owner"){ %>
+
+                        <a href="/promotion/delete/<%= p._id %>" 
+                        class="btn btn-danger btn-sm"
+                        onclick="return confirm('Delete this promotion?')">
+                        Delete
+                        </a>
+
+                        <% } %>
+
+                    </td>
+
+                </tr>
+
+            <% }) %>
+
+        <% } else { %>
+
+            <tr>
+                <td colspan="5" class="text-center">
+                    ยังไม่มี Promotion
+                </td>
+            </tr>
+
+        <% } %>
+
+        </tbody>
+
+    </table>
+
+</div>
+```

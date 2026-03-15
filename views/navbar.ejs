@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark"> <a href="/" class="navbar-brand"><img src="/images/home/logo.png" alt="Logo"  height="60"></a>
+    
+    <li class="nav-item dropdown">
+
+<a class="nav-link text-light text-uppercase font-weight-bold px-3 dropdown-toggle
+<% if(user && user.role === 'customer'){ %> disabled <% } %>"
+data-toggle="dropdown">ระบบหลังบ้าน (STORE)</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/manage">จัดการสินค้า</a>
+                <a class="dropdown-item" href="/addForm">บันทึกสินค้า</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+
+<a class="nav-link text-light text-uppercase font-weight-bold px-3 dropdown-toggle
+<% if(user && user.role === 'customer'){ %> disabled <% } %>"
+data-toggle="dropdown">
+การขาย (SALES)</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/sales/new">ขายสินค้า</a>
+                <a class="dropdown-item" href="/sales/all">แสดงรายการขาย</a>
+                <a class="dropdown-item" href="/promotion">Promotion</a>
+                <a class="dropdown-item" href="/sales/report">Sales Report</a>
+                <a class="dropdown-item" href="/payment">Payment Method</a>
+            </div>
+        </li>
+
+
+        <li class="nav-item dropdown">
+            <a class="nav-link text-light text-uppercase font-weight-bold px-3 dropdown-toggle" 
+               href="" data-toggle="dropdown">สมาชิก (MEMBERS)</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/register">สมัครสมาชิก</a>
+                <a class="dropdown-item" href="/members">จัดการสมาชิก</a> </div>
+                
+         
+            </div>
+        </li>
+
+              <li class="nav-item dropdown">
+            <a class="nav-link text-light text-uppercase font-weight-bold px-3 dropdown-toggle" 
+               href="" data-toggle="dropdown">เข้าสู่ระบบ (LOGIN) </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/login">Login</a>
+                <a class="dropdown-item" href="/logout">Logout</a>
+
+         
+            </div>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+            <% if (login && user) { %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-warning font-weight-bold px-3 dropdown-toggle" 
+                       href="" data-toggle="dropdown">👤 <%= user.name %> (<%= user.role %>)</a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+            <% } else { %>
+                <li class="nav-item">
+                    <a class="nav-link text-light text-uppercase font-weight-bold px-3" 
+                       href="/login">เข้าสู่ระบบ (LOGIN)</a>
+                </li>
+            <% } %>
+        </ul>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</nav>
