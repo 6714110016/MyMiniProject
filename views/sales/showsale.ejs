@@ -19,24 +19,31 @@
                 <th>Quantity</th>
                 <th>Total Price</th>
                 <th>Date</th>
-            </tr>
             <% sales.forEach(sale=> { %>
-                <tr>
-                    <td>
-                        <%= sale.product.name %>
-                    </td>
-                    <td>
-                        <%= sale.member ? sale.member.name : "-" %>
-                    </td>
-                    <td>
-                        <%= sale.quantity %>
-                    </td>
-                    <td>$<%= sale.totalPrice.toFixed(2) %>
-                    </td>
-                    <td>
-                       <%= sale.createdAt ? sale.createdAt.toLocaleString() : "-" %>
-                    </td>
-                </tr>
+<tr>
+
+<td>
+<%= sale.product ? sale.product.name : "-" %>
+</td>
+
+<td>
+<%= sale.member ? sale.member.name : "-" %>
+</td>
+
+<td>
+<%= sale.quantity %>
+</td>
+
+<td>
+$<%= sale.totalPrice ? sale.totalPrice.toFixed(2) : "0.00" %>
+</td>
+
+<td>
+<%= sale.createdAt ? sale.createdAt.toLocaleString() : "-" %>
+</td>
+
+</tr>
+            
                 <% }) %>
         </table>
     </div>

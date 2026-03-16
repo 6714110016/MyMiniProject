@@ -329,15 +329,24 @@ router.post("/checkout", async (req, res) => {
    SALES REPORT (OWNER ONLY)
 ============================== */
 
-router.get("/sales/all", async (req, res) => {
-  if (!req.session.user || req.session.user.role !== "owner") {
-    return res.send("Access Denied");
-  }
+router.get("/sales/all", async (req,res)=>{
 
-  const sales = await Sale.find().populate("product").populate("member");
+    try{
 
-  res.render("sales/showsale", { sales });
-});
+        const sales = await Sale.find()
+        .populate("product")
+        .populate("member")
+
+        res.render("sales/showsale",{
+            sales: sales
+        })
+
+    }catch(err){
+        console.log(err)
+        res.send("Error")
+    }
+
+})
 
 router.get("/sales/report", async (req, res) => {
   if (!req.session.user || req.session.user.role !== "owner") {
@@ -359,28 +368,26 @@ router.get("/sales/new", async (req, res) => {
   res.render("sales/newsale", { products });
 });
 
-router.post("/sales/insert", async (req, res) => {
-  if (!req.session.user) {
-    return res.redirect("/login");
-  }
+// ADD NEW SALE
+router.post("/sales/new", async (req,res)=>{
 
-  const { product, quantity } = req.body;
+    const { productId, quantity } = req.body
 
-  const productData = await Product.findById(product);
+    const product = await Product.findById(productId)
 
-  const totalPrice = productData.price * quantity;
+    const totalPrice = product.price * quantity
 
-  const newSale = new Sale({
-    product,
-    member: req.session.user._id,
-    quantity,
-    totalPrice,
-  });
+    const newSale = new Sale({
+        product: productId,
+        quantity: quantity,
+        totalPrice: totalPrice
+    })
 
-  await newSale.save();
+    await newSale.save()
 
-  res.redirect("/shop");
-});
+    res.redirect("/sales/all")
+
+})
 
 /* ==============================
    SHOP (CUSTOMER)
