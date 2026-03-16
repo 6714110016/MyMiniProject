@@ -398,7 +398,32 @@ router.get("/shop", async (req, res) => {
 
   res.render("index", { products });
 });
+/* ==============================
+   SEARCH PRODUCT BY PRICE
+============================== */
 
+router.get("/search", async (req, res) => {
+
+  try {
+
+    const min = parseInt(req.query.min) || 0;
+    const max = parseInt(req.query.max) || 999999;
+
+    const products = await Product.find({
+      price: { $gte: min, $lte: max }
+    });
+
+    res.render("index", {
+      title: "Search Result",
+      products: products
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.send("Search Error");
+  }
+
+});
 /* ==============================
    PRODUCTS
 ============================== */
