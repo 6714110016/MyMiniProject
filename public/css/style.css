@@ -348,3 +348,74 @@ input, select{
     }
 
 }
+/* =========================
+   Navbar (ฟ้า)
+========================= */
+
+.navbar {
+    background: linear-gradient(90deg, #0d6efd, #0a58ca) !important;
+}
+
+/* ตัวหนังสือ */
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #ffffff !important;
+}
+
+/* hover */
+.navbar .nav-link:hover {
+    color: #cfe2ff !important;
+}
+
+/* dropdown */
+.dropdown-menu {
+    border-radius: 10px;
+}
+
+.dropdown-item:hover {
+    background-color: #e7f1ff;
+}
+
+/* =========================
+   Checkout Page Background
+========================= */
+
+.checkout-page{
+    background-image:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('/images/background/checkout-bg.jpeg');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.manage-page{
+    background-image:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('/images/background/manage-bg.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.saveproduct-page{
+    background-image:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('/images/background/saveproduct-bg.jpeg');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.register-page{
+    background-image:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('/images/background/register-bg.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}

@@ -1,11 +1,26 @@
-<%- include('navbar') %> <div class="container mt-4">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Manage Members</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<!-- ✅ ใส่ class ตรงนี้ -->
+<body class="manage-page">
+
+<%- include('navbar') %>
+
+<div class="container mt-4">
+
     <h2>จัดการสมาชิก</h2>
     <p>เพิ่ม ลบ แก้ไขข้อมูลในฐานข้อมูล</p>
     
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="ค้นหาสินค้า...">
-    </div>
-
     <table class="table table-bordered">
         <thead class="thead-light">
             <tr>
@@ -16,6 +31,7 @@
                 <th>แก้ไข</th>
             </tr>
         </thead>
+
         <tbody>
             <% members.forEach(function(member) { %>
                 <tr>
@@ -34,5 +50,10 @@
                 </tr>
             <% }); %>
         </tbody>
+
     </table>
+
 </div>
+
+</body>
+</html>

@@ -323,7 +323,10 @@ router.post("/checkout", async (req, res) => {
 
   await newSale.save();
 
-  res.send("ชำระเงินสำเร็จ ด้วยวิธี " + paymentMethod);
+  res.render("checkout", {
+    paymentMethod: paymentMethod,
+    product: product
+  });
 });
 /* ==============================
    SALES REPORT (OWNER ONLY)
